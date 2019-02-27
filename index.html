@@ -4,8 +4,55 @@
   <head>
     <meta charset="utf-8">
     <title>Опрос Имущественный Вычет</title>
+    <link rel="stylesheet" href="css/foundation.min.css">
+
   </head>
   <body>
-    <h1>Тест</h1>
+    <div id="nv-quiz">
+      <div class="row">
+
+        <div id="frame-0-header" class="clearfix  text-center" v-if="stage==0">
+          <h1>Прежде чем начать...</h1>
+          <h2>Пожалуйста, пройдите опрос для уточнения процесса получения имущественного вычета.</h2>
+        </div>
+        <div id="frame-header" class="clearfix" v-else-if="stage!=finalStage">
+          <h1>Идет опрос</h1>
+          <h2 class="left">Вопрос: {{stage}}</h2>
+        </div>
+        <div id="frame-header" class="clearfix" v-if="stage==finalStage">
+          <h1>Опрос завершен!</h1>
+          <h2>Результаты ниже по тексту.</h2>
+        </div>
+
+        <div id="main-frame" class="column" >
+          <div class="text-center" v-if="stage==0">
+            <button type="button" @click="nextStage" id="button large">Начать!</button>
+          </div>
+          <div class="text-center" v-else-if="stage!=finalStage">
+            <p>{{currentQuestionText.text}}</p>
+
+            <button type="button" @click="nextStage" class="button right">Далее</button>
+          </div>
+          <div class="text-center" v-if="stage==finalStage">
+            <div class="" v-if="success">
+              Спасибо!
+              {{bonusInfo}}
+              Теперь вы можете приступить к загрузке документов!
+            </div>
+            <div class="" v-else>
+              Спасибо!
+              К сожалению, в данный момент у вас нет права на имущественный налоговый вычет.
+              Для дополнительной информации вы можете обратиться по телефону 8 *** *** *** *.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </body>
+
+  <script src="js/vue.js"></script>
+  <script src="js/nvQuiz.js"></script>
+
 </html>
