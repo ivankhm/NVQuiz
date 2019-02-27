@@ -15,35 +15,48 @@
           <h1>Прежде чем начать...</h1>
           <h2>Пожалуйста, пройдите опрос для уточнения процесса получения имущественного вычета.</h2>
         </div>
-        <div id="frame-header" class="clearfix" v-else-if="stage!=finalStage">
+        <div id="frame-header" class="clearfix text-center" v-else-if="stage!=finalStage">
           <h1>Идет опрос</h1>
-          <h2 class="left">Вопрос: {{stage}}</h2>
+          <h2>Вопрос: {{stage}}</h2>
         </div>
-        <div id="frame-header" class="clearfix" v-if="stage==finalStage">
+        <div id="frame-header" class="clearfix text-center" v-if="stage==finalStage">
           <h1>Опрос завершен!</h1>
           <h2>Результаты ниже по тексту.</h2>
         </div>
-
+        <hr>
         <div id="main-frame" class="column" >
           <div class="text-center" v-if="stage==0">
             <button type="button" @click="nextStage" id="button large">Начать!</button>
           </div>
           <div class="text-center" v-else-if="stage!=finalStage">
-            <p>{{currentQuestionText.text}}</p>
+            <div class="panel radius">
+              <div class="row">
+                {{currentQuestion.text}}
+              </div>
+              <div class="row">
+                <input type="radio" name="answer" v-model="currentQuestion.answer" value="true" id="answerYes"><label for="answerYes">Да</label>
+                <input type="radio" name="answer" v-model="currentQuestion.answer" value="false" id="answerNo"><label for="answerNo">Нет</label>
+              </div>
 
-            <button type="button" @click="nextStage" class="button right">Далее</button>
+            </div>
+            <div class="clearfix">
+              <button type="button" @click="nextStage" class="button right" :disabled="cantGoNext">Далее</button>
+              <button type="button" @click="prevStage" class="button left" :disabled="cantGoPrev">Назад</button>
+            </div>
+
           </div>
           <div class="text-center" v-if="stage==finalStage">
-            <div class="" v-if="success">
+            <div class="panel radius">
               Спасибо!
               {{bonusInfo}}
-              Теперь вы можете приступить к загрузке документов!
+              <div v-if="success">
+                Теперь вы можете приступить к загрузке документов!
+              </div>
+              <div v-else>
+                Для дополнительной информации вы можете обратиться по телефону 8 *** *** *** *.
+              </div>
             </div>
-            <div class="" v-else>
-              Спасибо!
-              К сожалению, в данный момент у вас нет права на имущественный налоговый вычет.
-              Для дополнительной информации вы можете обратиться по телефону 8 *** *** *** *.
-            </div>
+            <button type="button" id="button large" v-if="success">Перейти к загрузке документов.</button>
           </div>
         </div>
 
