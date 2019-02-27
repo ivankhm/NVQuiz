@@ -26,7 +26,7 @@
         <hr>
         <div id="main-frame" class="column" >
           <div class="text-center" v-if="stage==0">
-            <button type="button" @click="nextStage" id="button large">Начать!</button>
+            <button type="button" @click="nextStage" class="button large radius">Начать!</button>
           </div>
           <div class="text-center" v-else-if="stage!=finalStage">
             <div class="panel radius">
@@ -40,8 +40,8 @@
 
             </div>
             <div class="clearfix">
-              <button type="button" @click="nextStage" class="button right" :disabled="cantGoNext">Далее</button>
-              <button type="button" @click="prevStage" class="button left" :disabled="cantGoPrev">Назад</button>
+              <button type="button" @click="nextStage" class="button right radius" :disabled="cantGoNext">Далее</button>
+              <button type="button" @click="prevStage" class="button left radius" :disabled="cantGoPrev">Назад</button>
             </div>
 
           </div>
@@ -56,7 +56,7 @@
                 Для дополнительной информации вы можете обратиться по телефону 8 *** *** *** *.
               </div>
             </div>
-            <button type="button" id="button large" v-if="success">Перейти к загрузке документов.</button>
+            <button type="button" class="button large radius" v-if="success">Перейти к загрузке документов.</button>
           </div>
         </div>
 
